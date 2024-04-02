@@ -1,0 +1,107 @@
+package com.MSME.HRMS.TestCases;
+
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
+
+import com.MSME.HRMS.Base.BaseClass;
+import com.MSME.HRMS.PageObjects.ClaimSetUpPage;
+import com.MSME.HRMS.PageObjects.HomePage;
+import com.MSME.HRMS.PageObjects.LoginPage;
+import com.MSME.HRMS.Util.TestUtil;
+
+public class ClaimSetUpTest extends BaseClass{
+	
+	LoginPage loginPage;
+	HomePage homePage;
+	ClaimSetUpPage claimSetUpPage;
+	String sheetName="claimSetUp";
+	
+	String sheetName1="EditClaimSetUp";
+	
+	public ClaimSetUpTest()
+	{
+		
+		super();
+	}
+	
+	@BeforeMethod
+	public ClaimSetUpPage setUp() throws Throwable {
+		initialization();
+	    loginPage = new LoginPage();	
+	    homePage = loginPage.Login(prop.getProperty("tenantname"),prop.getProperty("username"), prop.getProperty("password"));
+	return   claimSetUpPage= homePage.ClaimSetUpIcon();
+	}
+	
+	
+	  
+	  @DataProvider
+	  public Object[] [] getHRMSTestData()
+	  {
+	  
+	  Object data [] []=TestUtil.getTestData(sheetName); 
+	  return data; 
+	  }
+	  
+	  @Test(priority = 1,dataProvider="getHRMSTestData")
+	  
+	  public void addClaimPostive(String claimName, String amount, String limitperclaim, String frequnecyCmb, String days, String description, String resetCmb,String ApplyToOption, String SelectedEmp) throws Throwable 
+	  {
+	        claimSetUpPage.AddClaimSetUp(claimName, amount, limitperclaim, frequnecyCmb,  days, description, resetCmb,ApplyToOption, SelectedEmp ); 
+	        Thread.sleep(3000);
+	  
+	  }
+	  
+		/*
+		 * @Test(enabled = false, dataProvider="getHRMSTestData") public void
+		 * addClaimSelectedEmployee(String claimName, String amount, String
+		 * limitperclaim, String frequnecyCmb, String days, String description, String
+		 * applyToOption, String selectedEmp) throws Throwable {
+		 * claimSetUpPage.AddClaimSetUp(claimName, amount, limitperclaim,frequnecyCmb,
+		 * days, description, applyToOption, selectedEmp); }
+		 */
+	 
+	
+	
+	 @DataProvider 
+	  public Object[] [] getHRMSTestData1() 
+	  {
+	  
+	  Object data [] []=TestUtil.getTestData1(sheetName1);
+	  return data; 
+	  }
+	  
+	  @Test(enabled = false, dataProvider="getHRMSTestData1") 
+	  public void editClaim(String EditClaimName,String ClaimName, String Amount, String LimitPerClaim, String FrequnecyCmb, String Days, String Desc,String AllToOpt, String ApplyToOpt, String SelectedEmp ) throws Throwable 
+	  {
+	  claimSetUpPage.editClaimPage(EditClaimName,ClaimName, Amount );
+	 //  claimSetUpPage.editClaimPageSelectedEmp(EditClaimName, ClaimName, Amount, LimitPerClaim, FrequnecyCmb, Days, Desc, ApplyToOpt, SelectedEmp);
+	 // Thread.sleep(3000);
+	  }
+	  
+	  
+	  @Test(enabled = false, dataProvider="getHRMSTestData1")
+	  public void editClaimSelectedEmp(String EditClaimName,String ClaimName, String Amount, String LimitPerClaim, String FrequnecyCmb, String Days, String Desc,String AllToOpt, String ApplyToOpt, String SelectedEmp ) throws InterruptedException
+	  {
+	      claimSetUpPage.editClaimPageSelectedEmp(EditClaimName, ClaimName, Amount, LimitPerClaim, FrequnecyCmb, Days, Desc, ApplyToOpt, SelectedEmp);
+	      Thread.sleep(3000); 
+	  }
+	  
+	  @Test(enabled = false, dataProvider = "getHRMSTestData1")
+	  public void changeDisbaleState(String EditClaimName,String ClaimName, String Amount, String LimitPerClaim, String FrequnecyCmb, String Days, String Desc,String AllToOpt, String ApplyToOpt, String SelectedEmp) throws Throwable
+	  {
+		  claimSetUpPage.disable(EditClaimName);
+	  }
+	  
+	
+		
+		  @AfterMethod
+		  public void tearDown()
+		  {
+			  driver.quit();
+		  
+		  }
+		 
+	 
+}

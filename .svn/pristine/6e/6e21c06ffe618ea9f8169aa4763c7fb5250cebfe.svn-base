@@ -1,0 +1,49 @@
+package com.MSME.HRMS.TestCases;
+
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+
+import com.MSME.HRMS.Base.BaseClass;
+import com.MSME.HRMS.PageObjects.ClaimManagemntPage;
+import com.MSME.HRMS.PageObjects.HomePage;
+import com.MSME.HRMS.PageObjects.LoginPage;
+
+public class ClaimManagementTest extends BaseClass {
+	
+	LoginPage loginPage;
+	HomePage homePage;
+	ClaimManagemntPage claimManagemntPage;
+
+	public  ClaimManagementTest()
+	{
+		super();
+	}
+	
+	@BeforeMethod
+	public ClaimManagemntPage setUp() throws Throwable
+	{
+		initialization();
+		loginPage=new LoginPage();
+		homePage=loginPage.Login(prop.getProperty("tenant"), prop.getProperty("username"), prop.getProperty("password"));
+	    return claimManagemntPage=homePage.ClaimMngtIcon();
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@AfterMethod
+	public void tearDown()
+	{
+		driver.quit();
+	}
+}

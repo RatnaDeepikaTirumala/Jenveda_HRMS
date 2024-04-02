@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name= "HRMS Application Automation Test Suite">
+    <test name="HRMS Test Cases">
+        <classes>
+          <!--   <class name="com.MSME.HRMS.TestCases.LoginPageTest"></class> -->
+             <class name="com.MSME.HRMS.TestCases.ClaimSetUpTest"></class>
+          <!--   <class name="com.MSME.HRMS.TestCases.HomePageTest"></class> -->
+           <!--  <class name="com.MSME.HRMS.TestCases.HolidayPageTest"></class> -->
+           
+        </classes>
+       </test>
+</suite>
