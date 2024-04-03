@@ -10,7 +10,7 @@ import com.MSME.HRMS.Base.BaseClass;
 
 public class HolidayPage extends BaseClass {
 	
-	ControlFunctionalities cf = new ControlFunctionalities();
+ControlFunctionalities cf = new ControlFunctionalities();
 	
 	//PageFactory or Object Repository
 	
@@ -159,7 +159,7 @@ public class HolidayPage extends BaseClass {
 		cf.setValue(nameTxtBx, holidayName,3000);
 	
 		cf.setValue(startDateTxtBx, startDate,3000);
-
+        Thread.sleep(3000);
 		cf.setValue(endDateTxtBx, endDate,3000);
 
 		cf.SelectCombobyVisibleText(applyToTxtBx, applyTo,3000);
@@ -196,6 +196,7 @@ public void addHolidaySelected(String holidayName, String startDate, String endD
 		cf.setMultiValue(remarksTxtBx, Remarks,3000);
 		cf.selectElement(saveBtn,3000);
 		Thread.sleep(3000);
+	    validateError();
 	    }
 		
 		
@@ -220,12 +221,13 @@ public void addHolidaySelectedEmp(String holidayName, String startDate, String e
     	cf.setValue(remarksTxtBx, Remarks,3000);
 	    cf.selectElement(saveBtn,3000);
 	    Thread.sleep(3000);
+	    validateError();
     }
 	
 	
 }
 
-    public void editHoliday(String editedHolidayName, String holidayName, String startDate, String endDate, String applyTo, String remarks) throws Throwable
+    public void editHoliday(String editedHolidayName, String holidayName, String startDate, String endDate, String applyTo,String Department, String Designation, String Employees, String remarks) throws Throwable
     {
     	if(holidayHdr.isDisplayed()==true)
     	{
@@ -240,11 +242,12 @@ public void addHolidaySelectedEmp(String holidayName, String startDate, String e
     	cf.SelectCombobyVisibleText(applyToTxtBx, applyTo, 3000);
     	cf.setValue(remarksTxtBx, remarks, 2000);
     	cf.selectElement(saveBtn, 3000);
+    	Thread.sleep(3000);
         validateError();
-        Thread.sleep(3000);
+        
         }
     }
-	public void editHoliday1(String editHolidayName, String holidayName, String startDate, String endDate, String applyTo, String Remarks, String departmentName,String designationName) throws Throwable{
+	public void editHoliday1(String editHolidayName, String holidayName, String startDate, String endDate, String applyTo, String Department,String Designation, String Employees, String Remarks) throws Throwable{
 		
 		System.out.println("--- HolidayTestCases : 5 ---");
 		cf.waitforElement(holidayHdr,10000);
@@ -283,11 +286,11 @@ public void addHolidaySelectedEmp(String holidayName, String startDate, String e
 		{
 			cf.waitforElement(departmentCmb,20000); 
 			cf.selectElement(departmentCmb,3000); 
-			cf.setValue(departmentCmb, departmentName, 3000);
+			cf.setValue(departmentCmb, Department, 3000);
 
 			cf.waitforElement(designationCmb,20000);
 			cf.selectElement(designationCmb, 3000); 
-			cf.setValue(designationCmb,designationName, 3000);
+			cf.setValue(designationCmb,Designation, 3000);
 			cf.setValue(remarksTxtBx, Remarks,3000);
 		}
 		
@@ -334,17 +337,21 @@ public void addHolidaySelectedEmp(String holidayName, String startDate, String e
 		
 		if (cf.iselementExists(errorTag)==false)
 		{
+			System.out.println("----------Holidays Test Script-001----------");
 			cf.waitforElement(grid,3000);
-			System.out.println("---Success---");
+			System.out.println("                           -----Success-----                           ");
+			System.out.println("-----------------------------------------------------------------------");
 			return true;	
 		}
 		
 		else
 		{
+			System.out.println("----------Holidays Test Script-001----------");
 			System.out.println(errorTag.getText());
-			System.out.println("***error Message***");
 			System.out.println(bottomErr.getText());
 			System.out.println("Holiday is not Added");
+			System.out.println("                          -----Failed-----                             ");
+			System.out.println("-----------------------------------------------------------------------");
 			return false;
 		}
 		
@@ -374,7 +381,9 @@ public void addHolidaySelectedEmp(String holidayName, String startDate, String e
 			System.out.println("----------Successfully Inactive------------");
 			Thread.sleep(3000);
 		}	
-		else  {
+		
+		else 
+		{
 			Thread.sleep(3000);
 			cf.selectElement(okBtn, 3000);
 			cf.waitforElement(holidayHdr, 3000);

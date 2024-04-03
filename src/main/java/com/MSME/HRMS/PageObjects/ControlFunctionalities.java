@@ -21,7 +21,7 @@ public class ControlFunctionalities {
 	public ControlFunctionalities() {
 		// TODO Auto-generated constructor stub
 	}
-
+	
 
 	public boolean setValue(WebElement prmElement, String prmValue, long  Timeout) 
 	{

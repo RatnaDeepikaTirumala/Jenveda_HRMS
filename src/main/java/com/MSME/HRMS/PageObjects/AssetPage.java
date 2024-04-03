@@ -174,7 +174,7 @@ public class AssetPage extends BaseClass {
 			}
 		}
     }
-}
+
 
 	/*public WebElement getCategory(String categoryName) {
 		//return driver.findElement(By.xpath("//span[text()='"+categoryName+"']")); 

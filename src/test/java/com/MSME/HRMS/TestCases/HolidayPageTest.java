@@ -23,6 +23,7 @@ public class HolidayPageTest extends BaseClass {
 
 	String sheetName="holidaysAll";
 	String sheetName1="holidaySel";
+	String sheetName2="holidayEmp";
 
 	
 
@@ -56,7 +57,7 @@ public class HolidayPageTest extends BaseClass {
 	  return data; 
 	  }
 		
-		  @Test(priority = 1, dataProvider = "getHRMSTestData")
+		  @Test(enabled=false, dataProvider = "getHRMSTestData")
 		  public void addHolidayTest(String HolidayName, String StartDate, String EndDate, String ApplyTo,String Remarks) throws Throwable 
 		  {
 		  
@@ -65,38 +66,45 @@ public class HolidayPageTest extends BaseClass {
 		 
 	  @DataProvider
 		 public Object[][] getTestData1() {
-			Object data[][] = TestUtil.getTestData1(sheetName1);
+			Object data[][] = TestUtil.getTestData(sheetName1);
 			return data;
 		 }
  
-	 @Test(enabled = false, dataProvider = "getTestData1")
-		  public void AddHolidaySel(String EditHolidayName,String holidayName, String startDate, String endDate, String applyTo, String Designation,String Designation1, String Designation2,  String Department,String Department1, String Department2, String employees, String Remarks) throws Throwable
+	 @Test(enabled=false, dataProvider = "getTestData1")
+		  public void AddHolidaySel(String EditHolidayName,String holidayName, String startDate, String endDate, String applyTo, String Department,String Department1, String Department2,String Designation,String Designation1, String Designation2, String employees, String Remarks) throws Throwable
 			{
-
+		    holidayPage.addHolidaySelected(holidayName, startDate, endDate, applyTo, Department, Department1, Department2, Designation, Designation1, Designation2, Remarks);
 		}
 	  
+	 @DataProvider
+	 public Object[][] getTestData() {
+		Object data[][] = TestUtil.getTestData(sheetName2);
+		return data;
+	 }
 		  
-		  @Test(enabled = false, dataProvider = "getTestData1")
-	  public void addSelEmp(String EditHolidayName,String holidayName, String startDate, String endDate, String applyTo, String Designation, String Department, String employees, String remarks) throws Throwable
+		  @Test(enabled=false, dataProvider = "getTestData")
+	  public void addSelEmp(String EditHolidayName,String holidayName, String startDate, String endDate, String applyTo, String employees, String Remarks) throws Throwable
 	  {
-		  holidayPage.addHolidaySelectedEmp(holidayName, startDate, endDate, applyTo, employees, remarks);
+		  holidayPage.addHolidaySelectedEmp(holidayName, startDate, endDate, applyTo,employees, Remarks);
 	  }
 		  
 	  
-      @Test(enabled = false, dataProvider = "getTestData1")
-	  public void editHoliday(String EditedHolidayName,String holidayName, String startDate, String endDate, String applyTo, String Designation,String Designation1, String Designation2,  String Department,String Department1, String Department2, String employees, String Remarks ) throws Throwable
+      @Test(priority=1, dataProvider = "getTestData1")
+	  public void editHoliday(String EditHolidayName,String holidayName, String startDate, String endDate, String applyTo, String Department,String Department1, String Department2,String Designation,String Designation1, String Designation2, String employees, String Remarks) throws Throwable
 	  {
-		  holidayPage.editHoliday(EditedHolidayName, holidayName, startDate, endDate, applyTo, Remarks);
+		  holidayPage.editHoliday1(EditHolidayName, holidayName, startDate, endDate, applyTo, Department,Designation,employees,Remarks);
 	  }
 		    	
 
-	  @Test(enabled=false) 
-	  public void EditHoliday(String editHolidayName, String
-	  holidayName, String startDate, String endDate, String applyTo, String
-	  Remarks, String departmentName,String designationName) throws Throwable {
-		  holidayPage.editHoliday(editHolidayName, holidayName, startDate, endDate,
-				  applyTo, Remarks);
-		  holidayPage.validateError(); }
+		/*
+		 * @Test(enabled=false) public void EditHoliday(String EditHolidayName,String
+		 * holidayName, String startDate, String endDate, String applyTo, String
+		 * Department,String Department1, String Department2,String Designation,String
+		 * Designation1, String Designation2, String employees, String Remarks) throws
+		 * Throwable { holidayPage.editHoliday1(EditHolidayName, holidayName, startDate,
+		 * endDate, applyTo,Department,Designation,employees, Remarks);
+		 * holidayPage.validateError(); }
+		 */
 			  
 				  
       @Test(enabled = false, dataProvider="getTestData1")
